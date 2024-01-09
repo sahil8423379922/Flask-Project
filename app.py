@@ -1,4 +1,4 @@
-from flask import Flask , render_template
+from flask import Flask , render_template , request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -24,14 +24,25 @@ class db_model(db.Model):
         return "{self.sno}-{self.title}"
 
 
-@app.route('/')
+@app.route('/',methods =['GET','POST'])
+
 def hello_world():
+    if request.method =="POST":
+        title= request.form['title']
+        desc=request.form['desc']
+        print("The title = {}".format(title))
+        print("The Descrpton = {}".format(desc))
+        task =db_model(title = title, desc=desc)
+        db.session.add(task)
+        db.session.commit()
     
-    title ="Samplee"
-    desc="Computer is a electroic device"
-    task =db_model(title = title, desc=desc)
-    db.session.add(task)
-    db.session.commit()
+    
+
+
+    
+    
+    
+  
 
     return render_template('index.html')
 
