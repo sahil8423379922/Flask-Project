@@ -99,6 +99,24 @@
           <th scope="col">Date</th>
         </tr>
       </thead>
+      <tbody>
+        {% for todo in altodo %}
+        <tr>
+          <td>{{loop.index}}</td>
+          <td>{{todo.title}}</td>
+          <td>{{todo.desc}}</td>
+          <td>{{todo.date_of_task}}</td>
+          <td>
+            <a
+              href="/delete/{{todo.sno}}"
+              type="button"
+              class="btn btn-outline-dark"
+              >Delete</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
     <!--Table Ends Here-->
 

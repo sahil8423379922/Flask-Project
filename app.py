@@ -1,4 +1,4 @@
-from flask import Flask , render_template , request
+from flask import Flask , render_template , request , redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -30,26 +30,28 @@ def hello_world():
     if request.method =="POST":
         title= request.form['title']
         desc=request.form['desc']
-        print("The title = {}".format(title))
-        print("The Descrpton = {}".format(desc))
+        
         task =db_model(title = title, desc=desc)
         db.session.add(task)
         db.session.commit()
     
-    
+    altodo = db_model.query.all()
 
 
-    
-    
-    
-  
-
-    return render_template('index.html')
+    return render_template('index.html',altodo =altodo)
 
 
 @app.route('/about')
 def about():
     return 'This is a about page'
+
+@app.route('/delete/<int:sno>')
+def delete(sno):
+    currenttodo = db_model.query.filter_by(sno=sno).first()
+    db.session.delete(currenttodo)
+    db.session.commit()
+
+    return redirect('/')
 
 
 
