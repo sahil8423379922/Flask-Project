@@ -27,7 +27,7 @@ class db_model(db.Model):
 @app.route('/')
 def hello_world():
     
-    title ="Sample"
+    title ="Samplee"
     desc="Computer is a electroic device"
     task =db_model(title = title, desc=desc)
     db.session.add(task)
