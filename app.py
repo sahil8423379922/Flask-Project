@@ -53,6 +53,21 @@ def delete(sno):
 
     return redirect('/')
 
+@app.route('/update/<int:sno>',methods =['GET','POST'])
+def update(sno):
+    if request.method =="POST":
+        title= request.form['title']
+        desc=request.form['desc']
+        currenttodo = db_model.query.filter_by(sno=sno).first()
+        currenttodo.title = title
+        currenttodo.desc = desc
+        db.session.add(currenttodo)
+        db.session.commit()
+        return redirect('/')
+
+    currenttodo = db_model.query.filter_by(sno=sno).first()
+    return render_template('update.html',currenttodo =currenttodo)
+
 
 
 if __name__ =="__main__":

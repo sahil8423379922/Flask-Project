@@ -64,10 +64,16 @@
 
     <!--Form Code is Started-->
     <div class="my-5">
-      <form class="container" action="/" method="POST">
+      <h3 class="container mb-4">Update Todo</h3>
+      <form
+        class="container"
+        action="/update/{{currenttodo.sno}}"
+        method="POST"
+      >
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Title</label>
           <input
+            value="{{currenttodo.title}}"
             type="text"
             class="form-control"
             id="title"
@@ -80,52 +86,20 @@
           <label for="exampleInputPassword1" class="form-label"
             >Description</label
           >
-          <input type="text" class="form-control" id="desc" name="desc" />
+          <input
+            type="text"
+            value="{{currenttodo.desc}}"
+            class="form-control"
+            id="desc"
+            name="desc"
+          />
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Update</button>
       </form>
     </div>
 
     <!-- Form Code is Ended-->
-
-    <!--Table Starts From Here-->
-    <table class="table container">
-      <thead>
-        <tr>
-          <th scope="col">S.NO</th>
-          <th scope="col">Ttle</th>
-          <th scope="col">Description</th>
-          <th scope="col">Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for todo in altodo %}
-        <tr>
-          <td>{{loop.index}}</td>
-          <td>{{todo.title}}</td>
-          <td>{{todo.desc}}</td>
-          <td>{{todo.date_of_task}}</td>
-          <td>
-            <a
-              href="/delete/{{todo.sno}}"
-              type="button"
-              class="btn btn-outline-dark"
-              >Delete</a
-            >
-
-            <a
-              type="button"
-              href="/update/{{todo.sno}}"
-              class="btn btn-outline-dark"
-              >Update</a
-            >
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <!--Table Ends Here-->
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
